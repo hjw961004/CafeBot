@@ -1,77 +1,75 @@
 package com.example.myapplication;
 
-<<<<<<< HEAD
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager2.widget.ViewPager2;
-
-import com.google.android.material.navigation.NavigationView;
-=======
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
->>>>>>> 3c23a51b2f6b7e69ad9d9b8e0df3059b164ab9c3
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
-import java.util.ArrayList;
+import me.relex.circleindicator.CircleIndicator3;
 
-public class HomeActivity extends AppCompatActivity {
-    ViewPager2 viewPager2;
-    DotsIndicator dotsIndicator;
+
+public class MainCflistActivity extends FragmentActivity {
+
+    private ViewPager2 mPager;
+    private FragmentStateAdapter pagerAdapter;
+    private int num_page = 2;
+    private CircleIndicator3 mIndicator;
     private BottomNavigationView mBottomNV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        ArrayList<DataPage> list = new ArrayList<>();
-        list.add(new DataPage(R.drawable.sample_1, "Starbucks", 4900));
-        list.add(new DataPage(R.drawable.sample_2, "Twosome Place", 4100));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-
-        viewPager2 = findViewById(R.id.viewPager2);
-        viewPager2.setAdapter(new ViewPagerAdapter(list));
-
-        dotsIndicator = findViewById(R.id.dots_indicator);
-        dotsIndicator.setViewPager2(viewPager2);
+        setContentView(R.layout.activity_cflist);
 
         mBottomNV = findViewById(R.id.nav_view);
-        mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 BottomNavigate(menuItem.getItemId());
 
                 return true;
             }
+        });
+
+
+        //ViewPager2
+        mPager = findViewById(R.id.viewpager);
+        //Adapter
+        pagerAdapter = new MyAdapter(this, num_page);
+        mPager.setAdapter(pagerAdapter);
+        //Indicator
+        mIndicator = findViewById(R.id.indicator);
+        mIndicator.setViewPager(mPager);
+        mIndicator.createIndicators(num_page,0);
+        //ViewPager Setting
+        mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        mPager.setCurrentItem(0);
+        mPager.setOffscreenPageLimit(1);
+
+        mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if (positionOffsetPixels == 0) {
+                    mPager.setCurrentItem(position);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                mIndicator.animatePageSelected(position%num_page);
+            }
+
         });
     }
     private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
@@ -108,16 +106,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-<<<<<<< HEAD
-}
-
-
-
-
-
-
-=======
-
 
 }
->>>>>>> 3c23a51b2f6b7e69ad9d9b8e0df3059b164ab9c3
+
