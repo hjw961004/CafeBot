@@ -30,7 +30,7 @@ public class MainCflistActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cflist);
 
-        mBottomNV = findViewById(R.id.nav_view);
+       /* mBottomNV = findViewById(R.id.nav_view);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -38,7 +38,7 @@ public class MainCflistActivity extends FragmentActivity {
 
                 return true;
             }
-        });
+        });*/
 
 
         //ViewPager2
@@ -72,7 +72,7 @@ public class MainCflistActivity extends FragmentActivity {
 
         });
     }
-    private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
+   /* private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
         String tag = String.valueOf(id);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -106,6 +106,6 @@ public class MainCflistActivity extends FragmentActivity {
 
 
     }
-
+*/
 }
 

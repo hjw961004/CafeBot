@@ -5,11 +5,11 @@ public class DataPage {
     String cafeName;
     int price;
 
-    public DataPage(int image, String cafeName){
+    /*public DataPage(int image, String cafeName){
         this.image = image;
         this.cafeName = cafeName;
     }
-
+*/
     public DataPage(int image, String cafeName, int price){
         this.image = image;
         this.cafeName = cafeName;

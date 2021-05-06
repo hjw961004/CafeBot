@@ -7,13 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-<<<<<<< HEAD
+
     <color name="bgc">#FF9999FF</color>
     <color name="coffee">#c1a694</color>
-=======
+
     <color name="cfb">#9999ff</color>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
->>>>>>> 3c23a51b2f6b7e69ad9d9b8e0df3059b164ab9c3
+
 </resources>

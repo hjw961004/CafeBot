@@ -20,7 +20,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        mBottomNV = findViewById(R.id.nav_view);
+        /*mBottomNV = findViewById(R.id.nav_view);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -28,9 +28,9 @@ public class SearchActivity extends AppCompatActivity {
 
                 return true;
             }
-        });
+        });*/
     }
-    private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
+    /*private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
         String tag = String.valueOf(id);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -63,6 +63,6 @@ public class SearchActivity extends AppCompatActivity {
         fragmentTransaction.commitNow();
 
 
-    }
+    }*/
 
 }

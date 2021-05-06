@@ -8,93 +8,13 @@
     android:background="@color/cfb"
     tools:context=".MainActivity">
 
-<<<<<<< HEAD:MyApplication3/app/src/main/res/layout-v21/activity_main.xml
-    <!--<TextView
-        android:id="@+id/TitleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="@string/title"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/cafeBotTitleImage"
-        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <ImageView
-        android:id="@+id/cafeBotTitleImage"
-        android:layout_width="74dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="76dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cafebot" />
-
-    <TextView
-        android:id="@+id/TitleText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/title2"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/refreshButton"
-        android:layout_width="62dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginBottom="4dp"
-        android:background="@color/bgc"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager2"
-        app:layout_constraintStart_toEndOf="@+id/TitleText2"
-        app:srcCompat="@drawable/refresh_111075__2_" />
-
-    <TextView
-        android:id="@+id/refreshText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/refresh"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/refreshButton"
-        app:layout_constraintStart_toEndOf="@+id/TitleText2" />
-
-    <ImageButton
-        android:id="@+id/filterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:background="@color/bgc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager2"
-        app:srcCompat="@drawable/filter" />
-=======
     <FrameLayout
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" >
-        <ImageView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:clickable="true"
-            app:srcCompat="@drawable/cafebot"
-            android:layout_marginLeft="10dp" />
+
+        <!--
         <TextView
             android:id="@+id/TitleText"
             android:layout_width="wrap_content"
@@ -106,14 +26,14 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginLeft="150dp"
             tools:layout_editor_absoluteX="128dp" />
-
+-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:layout_marginTop="100dp"
             android:background="@color/cfb"
-            tools:context=".HomeActivity">
+            tools:context=".MainActivity">
 
             <TextView
                 android:id="@+id/TitleText2"
@@ -123,6 +43,7 @@
                 android:textColor="#000000"
                 android:textSize="30sp"
                 android:textStyle="bold"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/viewPager2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -131,8 +52,9 @@
                 android:id="@+id/refreshButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="20dp"
                 android:background="@color/cfb"
                 app:layout_constraintBottom_toTopOf="@+id/viewPager2"
                 app:layout_constraintStart_toEndOf="@+id/TitleText2"
@@ -145,29 +67,29 @@
                 android:text="@string/refresh"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/refreshButton"
-                app:layout_constraintStart_toEndOf="@+id/TitleText2" />
-
->>>>>>> 3c23a51b2f6b7e69ad9d9b8e0df3059b164ab9c3:MyApplication3/app/src/main/res/layout/activity_home.xml
-
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintStart_toEndOf="@+id/TitleText2"/>
 
             <ImageButton
                 android:id="@+id/filterButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="28dp"
                 android:background="@color/cfb"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewPager2"
+                app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
                 app:srcCompat="@drawable/filter"
-                android:layout_marginRight="28dp" />
+                 />
 
             <TextView
                 android:id="@+id/filterText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
+                android:layout_marginEnd="25dp"
                 android:layout_marginRight="40dp"
                 android:text="@string/filter"
                 android:textColor="#000000"
@@ -176,9 +98,9 @@
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager2"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_marginBottom="75dp"
+                android:layout_width="270dp"
+                android:layout_height="270dp"
+                android:layout_marginBottom="130dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -190,21 +112,100 @@
                 android:id="@+id/dots_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="110dp"
                 app:dotsColor="@color/white"
                 app:dotsCornerRadius="8dp"
-                app:dotsSize="16dp"
+                app:dotsSize="14dp"
                 app:dotsSpacing="4dp"
                 app:dotsWidthFactor="2.5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewPager2"
+                app:layout_constraintTop_toBottomOf="@id/viewPager2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:progressMode="true"
                 app:selectedDotColor="@color/black" />
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="70dp"
+                android:clickable="true"
+                app:srcCompat="@drawable/cafebot" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/navigationView"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/navigationView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/windowBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:menu="@menu/bottom_nav" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="false">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <View
+                    android:id="@+id/view_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/black"
+                    android:layout_below="@+id/toolbar"/>
+                <!-- 툴바, 추가된 소스 -->
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:text="@string/app_name"
+                        android:textSize="25sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"/>
+                </androidx.appcompat.widget.Toolbar>
+
+            </RelativeLayout>
+<!--
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@drawable/side_nav_bar_white"
+                android:fitsSystemWindows="false"
+                app:headerLayout="@layout/nav_header_main"
+                app:menu="@menu/activity_main_drawer"
+                app:itemTextAppearance="@style/text_size">
+            </com.google.android.material.navigation.NavigationView>
+-->
+        </androidx.drawerlayout.widget.DrawerLayout>
     </FrameLayout>
-
-
 </LinearLayout>
