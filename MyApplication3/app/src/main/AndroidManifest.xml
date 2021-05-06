@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_cafebot_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-
         <activity
             android:name=".LoadingActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
@@ -21,23 +20,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.MyApplication.NoActionBar"/>
-        <!--
-        <activity android:name=".SearchActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        --><!--
-        <activity android:name=".MainCflistActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>-->
+            android:theme="@style/Theme.MyApplication.NoActionBar" />
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,7 @@ import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    //툴바
+    // 툴바
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private DotsIndicator dotsIndicator;
     private ArrayList<DataPage> list;
 
-    //바텀네비게이션뷰
+    // 바텀네비게이션뷰
+    private BottomNavigationView bottomNav;
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private SearchPage fragmentSearch = new SearchPage();
     private HomePage fragmentHome = new HomePage();
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 바텀네비게이션
-        BottomNavigationView bottomNav = findViewById(R.id.navigationView);
+        bottomNav = findViewById(R.id.navigationView);
         bottomNav.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
         this.InitializeLayout(); // 툴바
@@ -61,25 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void viewpage(){
-        list = new ArrayList<>();
-        list.add(new DataPage(R.drawable.sample_1, "Starbucks", 4900));
-        list.add(new DataPage(R.drawable.sample_2, "Twosome Place", 4100));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-
-        viewPager2 = findViewById(R.id.viewPager2);
-        viewPager2.setAdapter(new ViewPagerAdapter(list));
-
-        dotsIndicator = findViewById(R.id.dots_indicator);
-        dotsIndicator.setViewPager2(viewPager2);
-    }
     //툴바
     private void InitializeLayout() {
         //toolBar를 통해 App Bar 생성
@@ -113,27 +96,6 @@ public class MainActivity extends AppCompatActivity {
         Log.e("Frag", "Fragment");*/
     }
 
-    //바텀네비
-    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-            switch (menuItem.getItemId()) {
-                case R.id.searchItem:
-                    transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
-                    break;
-                case R.id.homeItem:
-                    transaction.replace(R.id.frameLayout, fragmentHome).commitAllowingStateLoss();
-                    break;
-                case R.id.cafeItem:
-                    transaction.replace(R.id.frameLayout, fragmentCafe).commitAllowingStateLoss();
-                    break;
-            }
-            return true;
-        }
-    }
-
     // 툴바 오른쪽 버튼
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,6 +117,53 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void viewpage(){
+        list = new ArrayList<>();
+        list.add(new DataPage(R.drawable.sample_1, "Starbucks", 4900));
+        list.add(new DataPage(R.drawable.sample_2, "Twosome Place", 4100));
+        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
+
+        viewPager2 = findViewById(R.id.viewPager2);
+        viewPager2.setAdapter(new ViewPagerAdapter(list));
+
+        dotsIndicator = findViewById(R.id.dots_indicator);
+        dotsIndicator.setViewPager2(viewPager2);
+    }
+
+    //바텀네비
+    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            bottomNav = findViewById(R.id.navigationView);
+
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            switch (menuItem.getItemId()) {
+                case R.id.searchItem:
+                    transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
+                    break;
+                case R.id.homeItem:
+                    transaction.replace(R.id.frameLayout, fragmentHome).commitAllowingStateLoss();
+                    break;
+                case R.id.cafeItem:
+                    transaction.replace(R.id.frameLayout, fragmentCafe).commitAllowingStateLoss();
+                    break;
+            }
+            return true;
+        }
+    }
+
+
+
+
 }
 
 
