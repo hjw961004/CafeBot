@@ -13,56 +13,46 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SearchActivity extends AppCompatActivity {
-    private BottomNavigationView mBottomNV;
 
+    // 바텀네비게이션뷰
+    private BottomNavigationView bottomNav;
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private SearchPage fragmentSearch = new SearchPage();
+    private HomePage fragmentHome = new HomePage();
+    private CafePage fragmentCafe = new CafePage();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        /*mBottomNV = findViewById(R.id.nav_view);
-        mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                BottomNavigate(menuItem.getItemId());
-
-                return true;
-            }
-        });*/
+        // 바텀네비게이션
+        bottomNav = findViewById(R.id.navigationView);
+        bottomNav.setOnNavigationItemSelectedListener(new SearchActivity.ItemSelectedListener());
     }
-    /*private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
-        String tag = String.valueOf(id);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    //바텀네비
+    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        Fragment currentFragment = fragmentManager.getPrimaryNavigationFragment();
-        if (currentFragment != null) {
-            fragmentTransaction.hide(currentFragment);
-        }
-
-        Fragment fragment = fragmentManager.findFragmentByTag(tag);
-        if (fragment == null) {
-            if (id == R.id.navigation_1) {
-                Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(intent1);
-            } else if (id == R.id.navigation_2){
-                Intent intent2 = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(intent2);
-            } else if (id == R.id.navigation_3){
-                Intent intent3 = new Intent(getApplicationContext(), MainCflistActivity.class);
-                startActivity(intent3);
+            switch (menuItem.getItemId()) {
+                case R.id.searchItem:
+                    Intent intent1 = new Intent(getApplicationContext(), com.example.myapplication.SearchActivity.class);
+                    startActivity(intent1);
+                    //transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
+                    break;
+                case R.id.homeItem:
+                    Intent intent2 = new Intent(getApplicationContext(), com.example.myapplication.MainActivity.class);
+                    startActivity(intent2);
+                    //transaction.replace(R.id.frameLayout, fragmentHome).commitAllowingStateLoss();
+                    break;
+                case R.id.cafeItem:
+                    Intent intent3 = new Intent(getApplicationContext(), com.example.myapplication.MainCflistActivity.class);
+                    startActivity(intent3);
+                    //transaction.replace(R.id.frameLayout, fragmentCafe).commitAllowingStateLoss();
+                    break;
             }
-
-            fragmentTransaction.add(R.id.content_layout, fragment, tag);
-        } else {
-            fragmentTransaction.show(fragment);
+            return true;
         }
-
-        fragmentTransaction.setPrimaryNavigationFragment(fragment);
-        fragmentTransaction.setReorderingAllowed(true);
-        fragmentTransaction.commitNow();
-
-
-    }*/
-
+    }
 }

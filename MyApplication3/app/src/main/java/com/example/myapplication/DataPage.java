@@ -3,15 +3,12 @@ package com.example.myapplication;
 public class DataPage {
     int image;
     String cafeName;
+    String menuName;
     int price;
 
-    /*public DataPage(int image, String cafeName){
+    public DataPage(int image, String menuName, String cafeName, int price){
         this.image = image;
-        this.cafeName = cafeName;
-    }
-*/
-    public DataPage(int image, String cafeName, int price){
-        this.image = image;
+        this.menuName = menuName;
         this.cafeName = cafeName;
         this.price = price;
     }
@@ -22,6 +19,14 @@ public class DataPage {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public String getMenuName(){
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 
     public String getCafeName() {

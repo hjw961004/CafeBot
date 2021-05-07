@@ -1,10 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -119,16 +120,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void viewpage(){
         list = new ArrayList<>();
-        list.add(new DataPage(R.drawable.sample_1, "Starbucks", 4900));
-        list.add(new DataPage(R.drawable.sample_2, "Twosome Place", 4100));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_1, "아메리카노","스타벅스", 4900));
+        list.add(new DataPage(R.drawable.sample_2, "아메리카노","투썸플레이스", 4100));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","이디야커피", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
 
         viewPager2 = findViewById(R.id.viewPager2);
         viewPager2.setAdapter(new ViewPagerAdapter(list));
@@ -145,13 +146,19 @@ public class MainActivity extends AppCompatActivity {
 
             switch (menuItem.getItemId()) {
                 case R.id.searchItem:
-                    transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
+                    Intent intent1 = new Intent(getApplicationContext(), com.example.myapplication.SearchActivity.class);
+                    startActivity(intent1);
+                    //transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
                     break;
                 case R.id.homeItem:
-                    transaction.replace(R.id.frameLayout, fragmentHome).commitAllowingStateLoss();
+                    Intent intent2 = new Intent(getApplicationContext(), com.example.myapplication.MainActivity.class);
+                    startActivity(intent2);
+                    //transaction.replace(R.id.frameLayout, fragmentHome).commitAllowingStateLoss();
                     break;
                 case R.id.cafeItem:
-                    transaction.replace(R.id.frameLayout, fragmentCafe).commitAllowingStateLoss();
+                    Intent intent3 = new Intent(getApplicationContext(), com.example.myapplication.MainCflistActivity.class);
+                    startActivity(intent3);
+                    //transaction.replace(R.id.frameLayout, fragmentCafe).commitAllowingStateLoss();
                     break;
             }
             return true;

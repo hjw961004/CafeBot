@@ -22,7 +22,8 @@
             android:name=".MainActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
         <activity
-            android:name=".MainCflistActivity"/>
+            android:name=".MainCflistActivity" />
+        <activity android:name=".SearchActivity"/>
     </application>
 
 </manifest>

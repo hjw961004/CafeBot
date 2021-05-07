@@ -23,12 +23,22 @@ public class MainCflistActivity extends FragmentActivity {
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 2;
     private CircleIndicator3 mIndicator;
-    private BottomNavigationView mBottomNV;
+
+    // 바텀네비게이션뷰
+    private BottomNavigationView bottomNav;
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private SearchPage fragmentSearch = new SearchPage();
+    private HomePage fragmentHome = new HomePage();
+    private CafePage fragmentCafe = new CafePage();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cflist);
+
+        // 바텀네비게이션
+        bottomNav = findViewById(R.id.navigationView);
+        bottomNav.setOnNavigationItemSelectedListener(new MainCflistActivity.ItemSelectedListener());
 
         //ViewPager2
         mPager = findViewById(R.id.viewpager);
@@ -60,6 +70,32 @@ public class MainCflistActivity extends FragmentActivity {
             }
 
         });
+    }
+    //바텀네비
+    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            switch (menuItem.getItemId()) {
+                case R.id.searchItem:
+                    Intent intent1 = new Intent(getApplicationContext(), com.example.myapplication.SearchActivity.class);
+                    startActivity(intent1);
+                    //transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
+                    break;
+                case R.id.homeItem:
+                    Intent intent2 = new Intent(getApplicationContext(), com.example.myapplication.MainActivity.class);
+                    startActivity(intent2);
+                    //transaction.replace(R.id.frameLayout, fragmentHome).commitAllowingStateLoss();
+                    break;
+                case R.id.cafeItem:
+                    Intent intent3 = new Intent(getApplicationContext(), com.example.myapplication.MainCflistActivity.class);
+                    startActivity(intent3);
+                    //transaction.replace(R.id.frameLayout, fragmentCafe).commitAllowingStateLoss();
+                    break;
+            }
+            return true;
+        }
     }
 }
 
