@@ -68,14 +68,14 @@ public class MainActivity extends AppCompatActivity {
         //toolBar를 통해 App Bar 생성
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false); // 기존 title 지우기
         actionBar.setDisplayHomeAsUpEnabled(true);  // 왼쪽 버튼 사용 여부 true
         actionBar.setHomeAsUpIndicator(R.drawable.ic_reorder_white_24dp);  // 왼쪽 버튼 이미지 설정
-/*
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        Log.e("Frag", "Fragment");*/
+        Log.e("Frag", "Fragment");
     }
 
     // 툴바 오른쪽 버튼
@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
-                Toast.makeText(getApplicationContext(), "메뉴 버튼 클릭됨", Toast.LENGTH_LONG).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -142,8 +141,6 @@ public class MainActivity extends AppCompatActivity {
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            bottomNav = findViewById(R.id.navigationView);
-
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
             switch (menuItem.getItemId()) {
@@ -160,9 +157,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
-
-
-
 
 }
 

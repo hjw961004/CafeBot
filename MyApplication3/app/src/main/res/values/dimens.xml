@@ -11,5 +11,11 @@
     <dimen name="offset">20dp</dimen>
     <dimen name="pageMarginAndOffset">40dp</dimen>
     <dimen name="frameSize">320dp</dimen>
+
+    <dimen name="nav_header_title">35dp</dimen>
+    <dimen name="nav_header_subtitle">28dp</dimen>
+
+    <dimen name="menu_text_size">22dp</dimen>
+    <dimen name="toolbar_title_size">25sp</dimen>
 </resources>
 
