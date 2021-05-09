@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -114,8 +115,19 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+
+            case R.id.action_guide:
+                ((TextView) findViewById(R.id.textView)).setText("Guide");
+                Toast.makeText(getApplicationContext(), "가이드 버튼 클릭됨", Toast.LENGTH_LONG).show();
+                return true;
+
+            case R.id.action_qna:
+                ((TextView) findViewById(R.id.textView)).setText("QnA");
+                Toast.makeText(getApplicationContext(), "QnA 버튼 클릭됨", Toast.LENGTH_LONG).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void viewpage(){

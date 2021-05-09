@@ -5,7 +5,8 @@
     <string name="nav_header_menu">MENU</string>
     <string name="nav_header_more">MORE</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_guide">Guide</string>
+    <string name="action_qna">QnA</string>
     <string name="title">
         Hello.
         \nThis is CafeBot.
