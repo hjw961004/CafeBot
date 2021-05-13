@@ -6,10 +6,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,6 +29,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     // 툴바
@@ -63,6 +66,30 @@ public class MainActivity extends AppCompatActivity {
         //transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
         // 바텀네비게이션
 
+    }
+
+    public void filter(View v){
+        Intent intent = new Intent(getApplicationContext(), FilterActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        dataSort(resultCode);
+    }
+
+    public void dataSort(int sortValue) {
+        if(sortValue == R.id.sortLow){
+            Collections.sort(list);
+        }
+        else if(sortValue == R.id.sortHigh){
+            Collections.sort(list);
+            Collections.reverse(list);
+        }
+
+        viewPager2.setAdapter(new ViewPagerAdapter(list));
     }
 
     //툴바
@@ -135,13 +162,13 @@ public class MainActivity extends AppCompatActivity {
         list.add(new DataPage(R.drawable.sample_1, "아메리카노","스타벅스", 4900));
         list.add(new DataPage(R.drawable.sample_2, "아메리카노","투썸플레이스", 4100));
         list.add(new DataPage(R.drawable.sample_3, "아메리카노","이디야커피", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 2300));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 5300));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 1400));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 6000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3320));
         list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
+        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 6007));
 
         viewPager2 = findViewById(R.id.viewPager2);
         viewPager2.setAdapter(new ViewPagerAdapter(list));

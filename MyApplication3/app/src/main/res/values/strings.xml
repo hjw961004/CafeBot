@@ -40,6 +40,9 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="filter_low">가격 낮은 순</string>
+    <string name="filter_high">가격 높은 순</string>
+    <string name="goback">적용</string>
 
 
 </resources>

@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_cafebot_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity android:name=".FilterActivity"
+            android:label="랜덤 메뉴 필터"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
         <activity
             android:name=".LoadingActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
@@ -21,9 +24,8 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
-        <activity
-            android:name=".MainCflistActivity" />
-        <activity android:name=".SearchActivity"/>
+        <activity android:name=".MainCflistActivity" />
+        <activity android:name=".SearchActivity" />
     </application>
 
 </manifest>
