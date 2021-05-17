@@ -39,13 +39,14 @@
         android:background="@drawable/side_nav_bar_white"
         android:gravity="left|center"
         android:orientation="vertical">
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textSize="@dimen/nav_header_subtitle"
+                android:text="카테고리"
                 android:textColor="@color/black"
-                android:text="카테고리" />
+                android:textSize="@dimen/nav_header_subtitle" />
     </LinearLayout>
 </LinearLayout>
