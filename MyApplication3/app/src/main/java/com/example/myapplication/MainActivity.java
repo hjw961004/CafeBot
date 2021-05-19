@@ -71,15 +71,14 @@ public class MainActivity extends AppCompatActivity {
         //FragmentTransaction transaction = fragmentManager.beginTransaction();
         //transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
         // 바텀네비게이션
-
     }
 
     // 필터 버튼 눌릴 때 실행 MainActivity의 FilterButton 에 onClick에 설정해둠
     public void filter(View v){
         // 메인 화면에서의 필터라면 mainFilter 실행
-        //mainFilter();
+        mainFilter();
         // 검색 화면에서의 카페 필터라면 cafeFilter 실행
-        cafeFilter();
+        //cafeFilter();
     }
 
     // 검색 화면에서 카페 필터시
