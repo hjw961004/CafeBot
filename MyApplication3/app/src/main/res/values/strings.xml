@@ -34,6 +34,14 @@
     <string name="category_yogurt">요거트</string>
     <string name="category_ade">에이드</string>
     <string name="category_tea">티</string>
+    <string name="category_frappe">프라페</string>
+    <string name="category_shake">쉐이크</string>
+    <string name="category_smoothie">스무디</string>
+    <string name="category_juice">과일주스</string>
+    <string name="category_Espresso"><![CDATA[에스프레소&라떼]]></string>
+    <string name="category_coldbrew">콜드브루</string>
+
+
 
     <!-- 디저트 분류-->
     <string name="category_cake">케이크</string>
@@ -80,6 +88,5 @@
     <string name="caffebene">카페베네</string>
     <string name="yoger">요거프레소</string>
     <string name="venti">더 벤티</string>
-
 
 </resources>

@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import androidx.fragment.app.FragmentManager;
@@ -52,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
     // 필터 체크표시를 확인하고 저장하기 위한 변수
     private int state = 0;
     private int cafeState = 0b1111111111111111110;
+    
+    // 카테고리 선택을 구분하기 위한 변수
     private int categoryState = 0;
+    private int subcategoryState = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Fragment로 넘겨 받은 값을 넣는다.
+        subcategoryState = data.getIntExtra("subcategoryState", 0);
+
+
         // requestCode 는 cafeFilter에서 실행시 0으로 넘기고 mainFilter에서 실행시 1을 넘긴다
         // 카테고리 분류작업은 2를 넘긴다.
         switch (requestCode){
@@ -125,6 +130,16 @@ public class MainActivity extends AppCompatActivity {
         switch (categoryState){
             case 1 :
                 Toast.makeText(getApplicationContext(), "카페인 선택", Toast.LENGTH_LONG).show();
+                switch (subcategoryState){
+                    case 5 :
+                        Toast.makeText(getApplicationContext(), "에스프레소&라떼 선택", Toast.LENGTH_LONG).show();
+                        break;
+                    case 6 :
+                        Toast.makeText(getApplicationContext(), "콜드브루 선택", Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 2 :
                 Toast.makeText(getApplicationContext(), "디카페인 선택", Toast.LENGTH_LONG).show();
@@ -134,6 +149,22 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 4 :
                 Toast.makeText(getApplicationContext(), "블렌디드 선택", Toast.LENGTH_LONG).show();
+                switch (subcategoryState){
+                    case 1 :
+                        Toast.makeText(getApplicationContext(), "프라페 선택", Toast.LENGTH_LONG).show();
+                        break;
+                    case 2 :
+                        Toast.makeText(getApplicationContext(), "쉐이크 선택", Toast.LENGTH_LONG).show();
+                        break;
+                    case 3 :
+                        Toast.makeText(getApplicationContext(),"스무디 선택", Toast.LENGTH_LONG).show();
+                        break;
+                    case 4 :
+                        Toast.makeText(getApplicationContext(), "과일주스 선택", Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 5 :
                 Toast.makeText(getApplicationContext(), "요거트 선택", Toast.LENGTH_LONG).show();

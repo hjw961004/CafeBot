@@ -1,15 +1,24 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
-public class DrinkMenu extends AppCompatActivity {
+interface OnTimePickerSetListener{
+    void onTimePickerSet(int state);
+}
+
+public class DrinkMenu extends AppCompatActivity implements OnTimePickerSetListener {
     private int categoryState = 0;
+    private int subcategoryState = 0;
+
+    private RadioGroup radioGroup;
     private RadioButton caffeine;
     private RadioButton decaffeine;
     private RadioButton latte;
@@ -17,12 +26,24 @@ public class DrinkMenu extends AppCompatActivity {
     private RadioButton yogurt;
     private RadioButton ade;
     private RadioButton tea;
+    private TextView textView;
+
+
+    FragmentBlended fragmentBlended;
+    FragmentCaffeine fragmentCaffeine;
+
+    public void onTimePickerSet(int state){
+        subcategoryState = state;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink_menu);
 
+
+
+        radioGroup = (RadioGroup)findViewById(R.id.radioGroup3);
         caffeine = (RadioButton)findViewById(R.id.caffeine);
         decaffeine = (RadioButton)findViewById(R.id.decaffeine);
         latte = (RadioButton)findViewById(R.id.latte);
@@ -30,6 +51,10 @@ public class DrinkMenu extends AppCompatActivity {
         yogurt = (RadioButton)findViewById(R.id.yogurt);
         ade = (RadioButton)findViewById(R.id.ade);
         tea = (RadioButton)findViewById(R.id.tea);
+
+        fragmentBlended = new FragmentBlended();
+        fragmentCaffeine = new FragmentCaffeine();
+        textView = (TextView)findViewById(R.id.textView2);
 
         Intent intent = getIntent();
         categoryState = intent.getExtras().getInt("categoryState");
@@ -60,10 +85,38 @@ public class DrinkMenu extends AppCompatActivity {
                 break;
         }
     }
+    public void selectElse(View v){
+
+        if(fragmentBlended.isAdded()){
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.remove(fragmentBlended);
+            transaction.commit();
+        }
+        else if (fragmentCaffeine.isAdded()){
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.remove(fragmentCaffeine);
+            transaction.commit();
+        }
+    }
+
+    public void selectCaffeine(View v){
+        textView.setText("카페인");
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, fragmentCaffeine);
+        transaction.commit();
+    }
+
+    public void selectBlended(View v){
+        textView.setText("블렌디드");
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, fragmentBlended);
+        transaction.commit();
+    }
 
     public void goback(View v){
-        RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroup3);
-        int i = rg.getCheckedRadioButtonId();
+        int i = radioGroup.getCheckedRadioButtonId();
 
         switch(i){
             case R.id.caffeine :
@@ -94,6 +147,7 @@ public class DrinkMenu extends AppCompatActivity {
 
         Intent intent = new Intent();
         intent.putExtra("categoryState", categoryState);
+        intent.putExtra("subcategoryState", subcategoryState);
         setResult(categoryState, intent);
         finish();
     }

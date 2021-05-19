@@ -7,6 +7,35 @@
     android:background="@color/bgc"
     tools:context=".DrinkMenu">
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+    </FrameLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="#CB7FD8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
     <RadioGroup
         android:id="@+id/radioGroup3"
         android:layout_width="120dp"
@@ -21,18 +50,21 @@
             android:id="@+id/caffeine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="selectCaffeine"
             android:text="@string/category_caffeine" />
 
         <RadioButton
             android:id="@+id/decaffeine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="selectElse"
             android:text="@string/category_decaffeine" />
 
         <RadioButton
             android:id="@+id/latte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="selectElse"
             android:text="@string/category_latte" />
 
         <RadioButton
@@ -40,26 +72,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="selectBlended"
             android:text="@string/category_blended" />
 
         <RadioButton
             android:id="@+id/yogurt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:onClick="selectElse"
             android:text="@string/category_yogurt" />
 
         <RadioButton
             android:id="@+id/ade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:onClick="selectElse"
             android:text="@string/category_ade" />
 
         <RadioButton
             android:id="@+id/tea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="selectElse"
             android:text="@string/category_tea" />
 
     </RadioGroup>
@@ -72,6 +106,6 @@
         android:text="@string/goback"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_container" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
