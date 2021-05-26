@@ -2,14 +2,16 @@ package com.example.myapplication;
 
 public class DataPage implements Comparable<DataPage>  {
     int image;
-    String cafeName;
     String menuName;
+    String cafeName;
+    String categoryName;
     int price;
 
-    public DataPage(int image, String menuName, String cafeName, int price){
+    public DataPage(int image, String menuName, String cafeName, String categoryName, int price){
         this.image = image;
         this.menuName = menuName;
         this.cafeName = cafeName;
+        this.categoryName = categoryName;
         this.price = price;
     }
 
@@ -35,6 +37,14 @@ public class DataPage implements Comparable<DataPage>  {
 
     public void setCafeName(String cafeName) {
         this.cafeName = cafeName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public int getPrice(){

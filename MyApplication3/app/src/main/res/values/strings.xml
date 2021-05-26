@@ -7,6 +7,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_guide">Guide</string>
     <string name="action_qna">QnA</string>
+    <string name="action_made">제작</string>
+    <string name="madeby">카페인 : 원동연, 조민수, 최선재, 최수현, 홍지원</string>
+
     <string name="title">
         Hello.
         \nThis is CafeBot.
@@ -14,6 +17,9 @@
     <string name="title2">
         랜덤 추천 메뉴
     </string>
+    <string name="result_text1">검색어 없음</string>
+    <string name="result_text2">을/를 검색(선택)한 결과</string>
+    <string name="categoryresult_text">선택한 카테고리</string>
     <string name="refresh">메뉴 변경</string>
     <string name="list_num">순서</string>
     <string name="slash">/</string>
@@ -42,17 +48,14 @@
     <string name="category_coldbrew">콜드브루</string>
 
 
-
     <!-- 디저트 분류-->
-    <string name="category_cake">케이크</string>
+    <string name="category_cake">케잌</string>
     <string name="category_icecream">아이스크림</string>
     <string name="category_sandwich">샌드위치</string>
     <string name="category_bakery">베이커리</string>
     <string name="category_salad">샐러드</string>
     <string name="category_bingsu">빙수</string>
     <string name="category_etc">기타</string>
-
-
     <string name="title_activity_main">MainActivity</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
@@ -65,28 +68,27 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="menu"><![CDATA[<-Menu]]></string>
+
     <string name="filter_low">가격 낮은 순</string>
     <string name="filter_high">가격 높은 순</string>
     <string name="goback">적용</string>
 
-
     <string name="Starbucks">스타벅스</string>
     <string name="coffeebean">커피빈</string>
-    <string name="compose">컴포즈커피</string>
-    <string name="Angel">엔제리너스</string>
-    <string name="hollys">할리스커피</string>
-    <string name="pascucci">파스쿠찌</string>
-    <string name="twosome">투썸플레이스</string>
-    <string name="coffeebay">커피베이</string>
     <string name="tomntoms">탐앤탐스</string>
-    <string name="droptop">카페드롭탑</string>
-    <string name="paulbassett">폴바셋</string>
-    <string name="EDIYA">이디야커피</string>
+    <string name="Angel">엔제리너스</string>
     <string name="paik">빽다방</string>
+    <string name="EDIYA">이디야커피</string>
+    <string name="pascucci">파스쿠찌</string>
+    <string name="coffeebay">커피베이</string>
+    <string name="hollys">할리스커피</string>
     <string name="gongcha">공차</string>
     <string name="mega">메가커피</string>
     <string name="caffebene">카페베네</string>
     <string name="yoger">요거프레소</string>
-    <string name="venti">더 벤티</string>
+    <string name="twosome">투썸플레이스</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,12 +1,16 @@
 package com.example.myapplication;
 
-import android.content.Context;
+
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
 import androidx.viewpager2.widget.ViewPager2;
 
 import androidx.fragment.app.FragmentManager;
@@ -27,13 +32,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     // 툴바
+    private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
-    private Context context = this;
+    private NavigationView navigationView;
 
     // 가운데
     private ViewPager2 viewPager2;
@@ -50,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     // 필터 체크표시를 확인하고 저장하기 위한 변수
     private int state = 0;
     private int cafeState = 0b1111111111111111110;
-    
+
     // 카테고리 선택을 구분하기 위한 변수
     private int categoryState = 0;
     private int subcategoryState = 0;
@@ -66,33 +78,75 @@ public class MainActivity extends AppCompatActivity {
 
         this.InitializeLayout(); // 툴바
 
-        this.viewpage(); // 뷰페이저
+        this.viewpage(randomMenu()); // 뷰페이저
 
         //FragmentTransaction transaction = fragmentManager.beginTransaction();
         //transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
         // 바텀네비게이션
+
     }
 
-    // 필터 버튼 눌릴 때 실행 MainActivity의 FilterButton 에 onClick에 설정해둠
-    public void filter(View v){
-        // 메인 화면에서의 필터라면 mainFilter 실행
-        mainFilter();
-        // 검색 화면에서의 카페 필터라면 cafeFilter 실행
-        //cafeFilter();
+    //툴바
+    private void InitializeLayout() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false); // 기존 title 지우기
+        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 만들기
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_reorder_white_24dp); //뒤로가기 버튼 이미지 지정
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+
+                int id = menuItem.getItemId();
+
+                if(id == R.id.nav_coffeedrink){
+                    categoryDrink();
+                }
+                else if(id == R.id.nav_dessert){
+                    categoryDessert();
+                }
+                return true;
+            }
+        });
     }
 
-    // 검색 화면에서 카페 필터시
-    public void cafeFilter(){
-        Intent intent = new Intent(getApplicationContext(), SearchFilter.class);
-        intent.putExtra("cafeState", cafeState);
-        startActivityForResult(intent, 1);
+    // 디저트 선택시 실행
+    public void categoryDessert(){
+        Intent intent = new Intent(getApplicationContext(), DessertMenu.class);
+        intent.putExtra("categoryState", categoryState);
+        intent.putExtra("subcategoryState", subcategoryState);
+        startActivityForResult(intent, 2);
+    }
+
+    // 커피, 음료 선택시 실행
+    public void categoryDrink(){
+        Intent intent = new Intent(getApplicationContext(), DrinkMenu.class);
+        intent.putExtra("categoryState", categoryState);
+        intent.putExtra("subcategoryState", subcategoryState);
+        startActivityForResult(intent, 2);
     }
 
     // 메인 화면에서 단순히 가격 필터시
-    public void mainFilter(){
+    public void mainFilter(View v){
         Intent intent = new Intent(getApplicationContext(), FilterActivity.class);
         intent.putExtra("state", state);
         startActivityForResult(intent, 0);
+    }
+
+    // 툴바 오른쪽 버튼
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        return true;
     }
 
     // 액티비티 종료시 자동 실행
@@ -103,15 +157,11 @@ public class MainActivity extends AppCompatActivity {
         // Fragment로 넘겨 받은 값을 넣는다.
         subcategoryState = data.getIntExtra("subcategoryState", 0);
 
-
         // requestCode 는 cafeFilter에서 실행시 0으로 넘기고 mainFilter에서 실행시 1을 넘긴다
         // 카테고리 분류작업은 2를 넘긴다.
         switch (requestCode){
             case 0 :
                 mainFiltering(resultCode);
-                break;
-            case 1 :
-                searchFiltering(resultCode);
                 break;
             case 2 :
                 categorySetting(resultCode);
@@ -199,15 +249,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    public void searchFiltering(int resultCode){
-        // 현재 상태를 저장한다.
-        cafeState = resultCode;
-        // 마지막 비트를 확인해서 가격 오름, 내림 정렬을 결정한다.
-        dataSort(cafeState % 2);
-
-        // 이곳에 cafeState의 각 비트를 확인해서 특정 카페를 데이터에서 받아와 list에 넣거나
-        // 혹은 이미 list에 있는 데이터 중 특정 카페를 제거 하는 식의 코드를 넣으면 됨
-    }
 
     public void mainFiltering(int resultCode){
         // 현재 상태를 저장한다.
@@ -229,99 +270,94 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setAdapter(new ViewPagerAdapter(list));
     }
 
-    //툴바
-    private void InitializeLayout() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false); // 기존 title 지우기
-        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 만들기
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_reorder_white_24dp); //뒤로가기 버튼 이미지 지정
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                menuItem.setChecked(true);
-                mDrawerLayout.closeDrawers();
-
-                int id = menuItem.getItemId();
-
-                if(id == R.id.nav_coffeedrink){
-                    categoryDrink();
-                }
-                else if(id == R.id.nav_dessert){
-                    categoryDessert();
-                }
-                return true;
-            }
-        });
-    }
-
-    public void categoryDessert(){
-        Intent intent = new Intent(getApplicationContext(), DessertMenu.class);
-        intent.putExtra("categoryState", categoryState);
-        startActivityForResult(intent, 2);
-    }
-
-    // 커피, 음료 선택시 실행
-    public void categoryDrink(){
-        Intent intent = new Intent(getApplicationContext(), DrinkMenu.class);
-        intent.putExtra("categoryState", categoryState);
-        startActivityForResult(intent, 2);
-    }
-
-    // 툴바 오른쪽 버튼
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
     //추가된 소스, ToolBar에 추가된 항목의 select 이벤트를 처리하는 함수
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //return super.onOptionsItemSelected(item);
-        int id = item.getItemId();
-        switch (id) {
+
+        switch (item.getItemId()) {
+
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
 
             case R.id.action_guide:
-                ((TextView) findViewById(R.id.textView)).setText("Guide");
-                Toast.makeText(getApplicationContext(), "가이드 버튼 클릭됨", Toast.LENGTH_LONG).show();
-                return true;
 
-            case R.id.action_qna:
-                ((TextView) findViewById(R.id.textView)).setText("QnA");
-                Toast.makeText(getApplicationContext(), "QnA 버튼 클릭됨", Toast.LENGTH_LONG).show();
+                Intent intent5 = new Intent(getApplicationContext(), com.example.myapplication.GuideActivity.class);
+                startActivity(intent5);
                 return true;
+            //가이드 액티비티 실행
+            case R.id.action_qna:
+                Intent intent6 = new Intent(getApplicationContext(), com.example.myapplication.QnaActivity.class);
+                startActivity(intent6);
+                return true;
+            //qna맥티비티 실행
+            case R.id.action_made:
+                ((TextView) findViewById(R.id.textView)).setText("제작");
+
+                Toast myToast = Toast.makeText(this.getApplicationContext(), R.string.madeby, Toast.LENGTH_SHORT);
+                myToast.show();
+                return true;
+            // 제작자 표시 메시지
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void viewpage(){
-        list = new ArrayList<>();
-        list.add(new DataPage(R.drawable.sample_1, "아메리카노","스타벅스", 4900));
-        list.add(new DataPage(R.drawable.sample_2, "아메리카노","투썸플레이스", 4100));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","이디야커피", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 2300));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 5300));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 1400));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 6000));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3320));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 3000));
-        list.add(new DataPage(R.drawable.sample_3, "아메리카노","EDIYA", 6007));
+    // 새로고침 버튼
+    public void onRefreshButton(View v) {
+        viewpage(randomMenu());
+    }
 
-        Collections.sort(list);
+    // 메뉴 리스트
+    public ArrayList<DataPage> randomMenu() {
+        InputStream is = this.getResources().openRawResource(R.raw.cafe_data);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        TypedArray typedArray = getResources().obtainTypedArray(R.array.all_menu);
+
+        list = new ArrayList<>();
+        int i = 0;
+        try {
+            String line;
+            while ((line = reader.readLine()) != null && (i < typedArray.length())) {
+                // do something with "line"
+                String array[] = line.split(",");
+                list.add(new DataPage(typedArray.getResourceId(i, -1), array[0], array[1], array[2], Integer.parseInt(array[3])));
+                i++;
+            }
+        }
+        catch (IOException ex) {
+            // handle exception
+        }
+        finally {
+            try {
+                is.close();
+            }
+            catch (IOException e) {
+                // handle exception
+            }
+        }
+        return list;
+    }
+
+    private void viewpage(ArrayList<DataPage> list) {
+        // 전체 메뉴 리스트 가져옴
+        ArrayList randomList = new ArrayList<>();
+
+        // 랜덤 함수 이용
+        Random ra = new Random();
+
+        // 전체 리스트에서 메뉴 10개만 랜덤으로 가져옴
+        for (int i=0; i<10; i++) {
+            int rv = ra.nextInt(list.size());
+            randomList.add(list.get(rv));
+            list.remove(rv);
+        }
+
+        this.list.clear();
+        this.list.addAll(randomList);
 
         viewPager2 = findViewById(R.id.viewPager2);
-        viewPager2.setAdapter(new ViewPagerAdapter(list));
+        viewPager2.setAdapter(new ViewPagerAdapter(randomList));
 
         dotsIndicator = findViewById(R.id.dots_indicator);
         dotsIndicator.setViewPager2(viewPager2);

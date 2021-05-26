@@ -64,37 +64,53 @@ public class DessertMenu extends AppCompatActivity {
     public void goback(View v){
         RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroup4);
         int i = rg.getCheckedRadioButtonId();
+        String categoryName;
+        Intent intent = new Intent(getApplicationContext(), com.example.myapplication.CategoryResultActivity.class);
 
         switch(i){
             case R.id.cake :
                 categoryState = 8;
+                categoryName = "케익";
+                intent.putExtra("카테고리명", categoryName);
                 break;
             case R.id.icecream :
                 categoryState = 9;
+                categoryName = "아이스크림";
+                intent.putExtra("카테고리명", categoryName);
                 break;
             case R.id.sandwich :
                 categoryState = 10;
+                categoryName = "샌드위치";
+                intent.putExtra("카테고리명", categoryName);
                 break;
             case R.id.bakery :
                 categoryState = 11;
+                categoryName = "베이커리";
+                intent.putExtra("카테고리명", categoryName);
                 break;
             case R.id.salad :
                 categoryState = 12;
+                categoryName = "샐러드";
+                intent.putExtra("카테고리명", categoryName);
                 break;
             case R.id.bingsu :
                 categoryState = 13;
+                categoryName = "빙수";
+               intent.putExtra("카테고리명", categoryName);
                 break;
             case R.id.etc :
                 categoryState = 14;
+                categoryName = "기타";
+                intent.putExtra("카테고리명", categoryName);
                 break;
             default:
                 categoryState = 0;
                 break;
         }
 
-        Intent intent = new Intent();
         intent.putExtra("categoryState", categoryState);
         setResult(categoryState, intent);
+        startActivity(intent);
         finish();
     }
 }

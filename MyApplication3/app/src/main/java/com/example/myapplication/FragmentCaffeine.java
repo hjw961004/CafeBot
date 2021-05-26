@@ -10,11 +10,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class FragmentCaffeine extends Fragment {
     int subcategoryState = 0;
     RadioGroup radioGroup;
+    RadioButton espresso;
+    RadioButton coldbrew;
 
     OnTimePickerSetListener onTimePickerSetListner;
 
@@ -31,13 +34,31 @@ public class FragmentCaffeine extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_caffeine, container, false);
 
+        if(getArguments() != null){
+            subcategoryState = getArguments().getInt("subcategoryState");
+        }
+
+        espresso = (RadioButton)rootView.findViewById(R.id.espresso);
+        coldbrew = (RadioButton)rootView.findViewById(R.id.coldbrew);
+
+        switch (subcategoryState){
+            case 5:
+                espresso.setChecked(true);
+                break;
+            case 6:
+                coldbrew.setChecked(true);
+                break;
+            default:
+                break;
+        }
+
         radioGroup = (RadioGroup)rootView.findViewById(R.id.radioGroup6);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
-                    case R.id.Espresso :
+                    case R.id.espresso :
                         subcategoryState = 5;
                         onTimePickerSetListner.onTimePickerSet(subcategoryState);
                         break;
