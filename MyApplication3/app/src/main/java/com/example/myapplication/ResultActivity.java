@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -87,26 +88,29 @@ public class ResultActivity extends AppCompatActivity {
     public void searchFiltering(int resultCode) {
         // 현재 상태를 저장한다.
         cafeState = resultCode;
-        searchList = new ArrayList<>();
 
-        int listSize = list.size();
+        searchList = new ArrayList<>();
+        searchList.addAll(list);
+
+        int listSize = searchList.size();
+
+        ArrayList<DataPage> temp = new ArrayList<>();
 
         if((cafeState & 0b100000000000000) == 0b100000000000000){
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("스타벅스")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("스타벅스")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
             }
         }
         if((cafeState & 0b010000000000000) == 0b010000000000000) {
-            Toast.makeText(getApplicationContext(),Integer.toString(listSize),Toast.LENGTH_SHORT).show();
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("커피빈")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("커피빈")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -114,9 +118,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b001000000000000) == 0b001000000000000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("탐앤탐스")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("탐앤탐스")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -124,9 +128,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000100000000000) == 0b000100000000000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("엔젤리너스")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("엔젤리너스")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -134,9 +138,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000010000000000) == 0b000010000000000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("빽다방")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("빽다방")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -144,9 +148,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000001000000000) == 0b000001000000000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("이디야커피")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("이디야커피")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -154,9 +158,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000000100000000) == 0b000000100000000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("파스쿠찌")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("파스쿠찌")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -164,9 +168,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000000010000000) == 0b000000010000000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("커피베이")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("커피베이")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -174,9 +178,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000000001000000) == 0b000000001000000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("할리스커피")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("할리스커피")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -184,9 +188,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000000000100000) == 0b000000000100000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("공차")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("공차")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -194,9 +198,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000000000010000) == 0b000000000010000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("메가커피")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("메가커피")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -204,9 +208,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000000000001000) == 0b000000000001000) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("카페베네")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("카페베네")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -214,9 +218,9 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000000000000100) == 0b000000000000100) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("요거프레소")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("요거프레소")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
@@ -224,20 +228,20 @@ public class ResultActivity extends AppCompatActivity {
         }
         if((cafeState & 0b000000000000010) == 0b000000000000010) {
             for(int i = 0; i < listSize; i++){
-                if(list.get(i).getCafeName().equals("투썸플레이스")){
-                    searchList.add(list.get(i));
-                    list.remove(i);
+                if(searchList.get(i).getCafeName().equals("투썸플레이스")){
+                    temp.add(searchList.get(i));
+                    searchList.remove(i);
                     i--;
                     listSize--;
                 }
             }
         }
 
-        list.clear();
-        list.addAll(searchList);
-        // 마지막 비트를 확인해서 가격 오름, 내림 정렬을 결정한다.
-        dataSort(cafeState % 2);
+        searchList.clear();
+        searchList.addAll(temp);
 
+        // 마지막 비트를 확인해서 가격 오름, 내림 정렬을 결정한다.
+        dataSort(cafeState % 2, searchList);
 
         // 이곳에 cafeState의 각 비트를 확인해서 특정 카페를 데이터에서 받아와 list에 넣거나
         // 혹은 이미 list에 있는 데이터 중 특정 카페를 제거 하는 식의 코드를 넣으면 됨
@@ -278,10 +282,10 @@ public class ResultActivity extends AppCompatActivity {
         resultNum = (TextView) findViewById(R.id.resultSumNum);
 
         result_ViewPager2 = findViewById(R.id.resultViewPager2);
-        result_ViewPager2.setAdapter(new ViewPagerAdapter(list));
+        result_ViewPager2.setAdapter(new ViewPagerAdapter(searchList));
 
         // 총 페이지 숫자
-        pageNum = new ViewPagerAdapter(list);
+        pageNum = new ViewPagerAdapter(searchList);
         int sumNum = pageNum.getItemCount();
         resultNum.setText(String.valueOf(sumNum));
         resultCur.setText(String.valueOf(1)); // 초기값 1
@@ -415,7 +419,7 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     // sortValue에 따라 오름, 내림 차순 정렬
-    public void dataSort(int sortValue) {
+    public void dataSort(int sortValue, ArrayList<DataPage> list) {
         if(sortValue == 0){
             Collections.sort(list);
         }
@@ -462,6 +466,8 @@ public class ResultActivity extends AppCompatActivity {
             }
         }
 
+
+        dataSort(cafeState % 2, list);
 
         resultCur = (TextView) findViewById(R.id.resultCurNum);
         resultNum = (TextView) findViewById(R.id.resultSumNum);
